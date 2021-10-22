@@ -22,11 +22,15 @@
 
 <body>
 
-<input type="file" id="file-input" />
-<h3>Contenido del archivo:</h3>
+<input type="file" id="file-input" class="btn btn-success" />
+<div style = " padding-top: 20px;">
+<button onclick="Sort('MergeSort','nav-merge')" class="btn btn-primary"> MergeSort </button>
+<button onclick="Sort('QuickSort','nav-quick')" class="btn btn-primary"> QuickSort </button>
+<button onclick="BenchmarkSort()" class="btn btn-primary"> Benchmark </button>
+</div>
+
+<h3><br>Tablas de Ordenamiento:</h3>
 <pre id="contenido-archivo"></pre>
-<button onclick="Sort('MergeSort','nav-merge')"> MergeSort </button>
-<button onclick="Sort('QuickSort','nav-quick')"> QuickSort </button>
 
 <nav>
   <div class="nav nav-tabs" id="nav-tab" role="tablist">

@@ -137,6 +137,55 @@ function leerArchivo(e) {
       });
 
   }
+
+  function BenchmarkSort()
+{
+      var valores = {
+          "funcion":              "BenchmarkSort",
+          "data":                 data_original,
+          "index":                2
+      };
+      //console.log("Valores: ");
+      //console.log(valores);
+      var delayMillis = 30000; //3 segundos
+      var json = "";
+      $.ajax({
+          data: valores,
+          url: 'app/endpoint.api.php',
+          type: 'post',
+          beforeSend: function(){
+              //$("#resultado").html("Procesando, espere por favor...");
+              console.log("procesando...");
+              
+          },
+          success: function (response){
+              
+              //Imprime los valores en la tabla
+              console.log("Respuesta ");
+              console.log(response);  
+              
+              arreglo = JSON.parse(response);
+              console.log(arreglo["time"]); 
+              json = JSON.stringify(arreglo["time"]); 
+              CsvToTable(arreglo["csv_merge"],'nav-merge');
+              CsvToTable(arreglo["csv_quick"],'nav-quick');
+
+              //Imprime la gráfica de medicion
+              
+              values = arreglo["time"];
+              console.log("Tiempos:");
+              console.log(values);
+              google.charts.load('current', {'packages':['corechart']});
+              google.charts.setOnLoadCallback(drawChart);     
+                     
+
+          },
+          error: function() {
+              alert('Error al consultar la gráfica de tiempos');
+          }
+      });
+
+  }
 /*
   values = [
     ['Year', 'Sales', 'Expenses', 'step'],
@@ -152,9 +201,11 @@ function leerArchivo(e) {
     var data = google.visualization.arrayToDataTable(values);
 
     var options = {
-      title: 'Company Performance',
+      title: 'Rendimiento en segundos MergeSort Vs QuickSort',
       curveType: 'function',
-      legend: { position: 'bottom' }
+      legend: { position: 'Right' },
+      width: 1200,
+      height: 500
     };
 
     var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
