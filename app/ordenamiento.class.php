@@ -5,12 +5,25 @@ Class  Ordenamiento
     public $num_fractions = 10;
     public $min_fraction = 0;
     public $next_step = 0;
-    public $array_time = array( array("Elementos","Realtime","BigO") );
+    public $array_time = array( array("Elementos","MergeSort","QuickSort") );
     public $header = array();
 
     function __construct() 
     {
        
+    }
+
+    public function init_matriz_graph($ord, $n, $m)
+    {
+        $ord->array_time = array();
+        $row = array();
+    
+        foreach (range(1,$n-2) as $row) {
+            foreach (range(1,$m-1) as $col) {
+                array_push($row,0);
+            }
+            array_push($ord->array_time ,$row);
+        }
     }
 
     public function sort_by_index ($array, $index) {

@@ -124,6 +124,8 @@ function leerArchivo(e) {
               //Imprime la gráfica de medicion
               
               values = arreglo["time"];
+              console.log("Tiempos:");
+              console.log(values);
               google.charts.load('current', {'packages':['corechart']});
               google.charts.setOnLoadCallback(drawChart);     
                      

@@ -9,6 +9,7 @@ include_once "/var/www/html/ordenamiento/app/ordenamiento.class.php";
 
 $ord = new Ordenamiento();
 
+
 if ($_POST['funcion'] == "MergeSort") { print MergeSort($_POST['data'], $_POST['index'] , $ord); } 
 elseif ($_POST['funcion'] == "QuickSort") { print QuickSort($_POST['data'], $_POST['index'], $ord); } 
 else{
@@ -30,12 +31,13 @@ function MergeSort($csv , $index, $ord )
     //$ord->array_time = array( array("Elementos","Realtime","BigO") );
     //if (count($ord->array_time) == 0)  { $ord->array_time = array( array("Elementos","Realtime","BigO") ) };
 
-    $new_array = array();
     $arr = array();
     $n = 1;
 
     for ($i=$step; $i <= $cantidad ; $i ) 
-    { 
+    {         
+        $new_array = array();
+
         foreach (range(1, $i) as $k) {
             array_push($new_array,$arreglo[$k-1]);
         }
@@ -45,10 +47,7 @@ function MergeSort($csv , $index, $ord )
         $arr = $ord->mergesort($new_array,$index);
         $end = microtime(true);
         $time = $end - $start;
-        //$time = number_format($time, 3, '.', '');
-        //$bigo = ($i * log($i)) / 10000;
-        //$bigo = (float)number_format($bigo, 3, '.', '');
-        //array_push($array_time, array($i,$time,$bigo) );
+        
         $ord->array_time[$n][0] = $i;
         $ord->array_time[$n][1] = $time;
         $ord->array_time[$n][2] = ( !array_key_exists(2,$ord->array_time[$n]) || is_null($ord->array_time[$n][2])) ? 0 : $ord->array_time[$n][2];
@@ -81,12 +80,13 @@ function QuickSort($csv , $index, $ord )
     //$ord->array_time = array( array("Elementos","Realtime","BigO") );
     //if (count($ord->array_time) == 0)  { $ord->array_time = array( array("Elementos","Realtime","BigO") ) };
 
-    $new_array = array();
     $arr = array();
     $n = 1;
 
     for ($i=$step; $i <= $cantidad ; $i ) 
     { 
+        $new_array = array();
+
         foreach (range(1, $i) as $k) {
             array_push($new_array,$arreglo[$k-1]);
         }
@@ -101,7 +101,7 @@ function QuickSort($csv , $index, $ord )
         //$bigo = (float)number_format($bigo, 3, '.', '');
         //array_push($array_time, array($i,$time,$bigo) );
         $ord->array_time[$n][0] = $i;
-        $ord->array_time[$n][1] = ( !array_key_exists(2,$ord->array_time[$n]) || is_null($ord->array_time[$n][1])) ? 0 : $ord->array_time[$n][1];
+        $ord->array_time[$n][1] = ( !array_key_exists("1",$ord->array_time[$n]) || is_null($ord->array_time[$n][1])) ? 0 : $ord->array_time[$n][1];
         $ord->array_time[$n][2] = $time;
         
         $i = $i+$step;
